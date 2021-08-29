@@ -1,0 +1,37 @@
+Volume vs Persistent Volume vs Persistent Volume Claim
+
+In Kubernetes world:
+
+Volume:
+    Data storage object associated with a Pod (inside) only accessed by containers inside the pod.
+    If container dies, the new one created in its place will have access to the volume.
+    If the pod dies, the volume dies as well.
+
+Persistent Volume:
+    Long-term, durable storage. Not tied to any pod or container.
+    If container dies, the new one created in its place will be able to access the persistent volume.
+    If the pod dies, the new one will be able to access the persistent volume.
+
+Persistent Volume Claim:
+    Request for storage assigned to the pod. Kubernetes will slice piece of local drive(some storage type for Cloud Providers) to fulfil the request.
+
+
+Nginx
+https://www.joyfulbikeshedding.com/blog/2018-03-26-studying-the-kubernetes-ingress-system.html
+
+Installation
+https://kubernetes.github.io/ingress-nginx/deploy/
+
+kubectl get pods -n ingress-nginx // to check if running
+
+Kubernetes Dashboard
+1. https://github.com/kubernetes/dashboard#install
+2. kubectl apply -f <recommended.yaml>
+3. curl <recommended.yaml> > kubernetes-dashboard.yaml
+4. args:
+    - --auto-generate-certificates
+    - --enable-skip-login
+    - --disable-settings-authorizer
+5. kubectl apply -f kubernetes-dashboard.yaml
+6. kubectl proxy
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
